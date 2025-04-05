@@ -1,4 +1,4 @@
-import {StyleSheet, TextInput, View } from 'react-native';
+import { StyleSheet, Pressable, TextInput, View , Text} from 'react-native';
 import { useState } from 'react';
 
 export default function MonInputTexte() {
@@ -20,23 +20,34 @@ export default function MonInputTexte() {
                 onChangeText={setPassword}
                 style={styles.inputs}
             />
-            
+            <Pressable
+            onPress={() => alert('Bouton appuyé')}
+            style={({ pressed }) => ({
+            backgroundColor: pressed ? '#aaa' : '#007AFF',
+            padding: 12,
+            borderRadius: 8,
+            })}
+        >
+            <Text style={{ color: 'white', textAlign: 'center', fontSize: 16 }}>
+            Se connecter
+            </Text>
+      </Pressable>
         </View>
     );
 }
 const styles = StyleSheet.create({
     container: {
-      flex: 1,
-      backgroundColor: '#fff',
-      justifyContent: 'center',
-      alignItems: 'center',
+        flex: 1,
+        backgroundColor: '#fff',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
-    inputs:{
+    inputs: {
         borderWidth: 1,
         borderColor: '#ccc',
         padding: 10,
         margin: 10,
         borderRadius: 8,
-        width:300,
+        width: 300,
     }
-  });
+});
