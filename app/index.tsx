@@ -1,40 +1,54 @@
-import { StyleSheet, Pressable, TextInput, View , Text} from 'react-native';
+import { StyleSheet, Pressable, TextInput, View, Text } from 'react-native';
 import { useState } from 'react';
-import { Stack,router } from 'expo-router';
-
-type Personne = {
-    nom: string;
-    motDePasse: string;
-    image: string;  
-    son: string;    
-    couleur: string;
-  };
+import { Stack, router } from 'expo-router';
+import { useContext } from 'react';
+import { PersonneContext } from './context/PersonneContext';
 
 export default function MonInputTexte() {
-    const [texte, setTexte] = useState('');
+    const [nom, setNom] = useState('');
     const [password, setPassword] = useState('');
 
+    const context = useContext(PersonneContext);
+    if (!context) throw new Error('Contexte Personne non trouvé');
+    const { personne, setPersonne } = context;
+    
+    const changerNom = () => {
+        setPersonne(prev => ({ ...prev, nom: nom }));
+      };
+      const changerMP = () => {
+        setPersonne(prev => ({ ...prev, motDePasse: password }));
+      };
+      const changerCouleur = () => {
+        setPersonne(prev => ({ ...prev, couleur: "#fff" }));
+      };
+      const changerImage = () => {
+        setPersonne(prev => ({ ...prev, image: '../assets/images/pfp-base.jpg' }));
+      };      
     const handleLogin = () => {
-        if (texte.toLocaleLowerCase() == "math" && password == "123") {
-          router.replace('/(tabs)/profil');
+        if (nom.toLocaleLowerCase() == "math" && password == "123") {
+            changerNom();
+            changerMP();
+            changerCouleur();
+            changerImage();
+            router.replace('/(tabs)/profil');
         }
         else {
-          alert('Champs Invalide');
+            alert('Champs Invalide');
         }
-      };
+    };
 
     return (
         <View style={styles.container}>
             <Stack.Screen
-            options={{
-            title: 'Connexion',
-            headerBackVisible: false,
-            }}
+                options={{
+                    title: 'Connexion',
+                    headerBackVisible: false,
+                }}
             />
             <TextInput
                 placeholder="Entrez votre nom"
-                value={texte}
-                onChangeText={setTexte}
+                value={nom}
+                onChangeText={setNom}
                 style={styles.inputs}
             />
             <TextInput
@@ -45,17 +59,17 @@ export default function MonInputTexte() {
                 style={styles.inputs}
             />
             <Pressable
-            onPress={handleLogin}
-            style={({ pressed }) => ({
-            backgroundColor: pressed ? '#aaa' : '#007AFF',
-            padding: 12,
-            borderRadius: 8,
-            })}
-        >
-            <Text style={{ color: 'white', textAlign: 'center', fontSize: 16 }}>
-                Se connecter
-            </Text>
-      </Pressable>
+                onPress={handleLogin}
+                style={({ pressed }) => ({
+                    backgroundColor: pressed ? '#aaa' : '#007AFF',
+                    padding: 12,
+                    borderRadius: 8,
+                })}
+            >
+                <Text style={{ color: 'white', textAlign: 'center', fontSize: 16 }}>
+                    Se connecter
+                </Text>
+            </Pressable>
         </View>
     );
 }
