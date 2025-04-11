@@ -1,6 +1,7 @@
 import { StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { Text, View } from '@/components/Themed';
 import { useContext, useState, useEffect } from 'react';
+import { useRouter} from 'expo-router';
 import { PersonneContext } from '../../context/PersonneContext';
 import { Ionicons } from '@expo/vector-icons';
 import { Audio } from 'expo-av';
@@ -11,6 +12,7 @@ export default function TabOneScreen() {
 
   const { personne } = context;
   const [sound, setSound] = useState<Audio.Sound | null>(null);
+  const router = useRouter();
 
   console.log("Son de la personne :", personne.son);
   
@@ -55,7 +57,9 @@ export default function TabOneScreen() {
             color={personne?.son ? 'white' : 'gray'}
           />
         </TouchableOpacity>
-      <Ionicons name="settings-outline" size={50} color={'white'} />
+        <TouchableOpacity onPress={() => router.push('/(tabs)/profil/parametres')}>
+          <Ionicons name="settings-outline" size={50} color={'white'} />
+        </TouchableOpacity>
     </View>
   </View>
   
