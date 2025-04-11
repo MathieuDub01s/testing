@@ -33,7 +33,7 @@ export default function MonInputTexte() {
             changerMP();
             changerCouleur();
             changerImage();
-            router.replace('/(tabs)/profil');
+            router.replace('/(tabs)/profil/profil');
         }
         else {
             alert('Champs Invalide');
@@ -53,6 +53,7 @@ export default function MonInputTexte() {
                 value={nom}
                 onChangeText={setNom}
                 style={styles.inputs}
+                placeholderTextColor="#888" 
             />
             <TextInput
                 placeholder="Mot de passe"
@@ -60,6 +61,7 @@ export default function MonInputTexte() {
                 value={password}
                 onChangeText={setPassword}
                 style={styles.inputs}
+                placeholderTextColor="#888" 
             />
             <Pressable
                 onPress={handleLogin}
@@ -73,6 +75,16 @@ export default function MonInputTexte() {
                     Se connecter
                 </Text>
             </Pressable>
+            <View style={styles.footer}>
+                <Text style={{fontSize:16}}>
+                    Mathieu Dubois, 
+                    Kéven B. Boisclair et
+                    Rosalie Boyer
+                </Text>
+                
+            </View>
+
+        
         </View>
     );
 }
@@ -91,4 +103,16 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         width: 300,
     },
+    footer: {
+        position: 'absolute',
+        bottom: 20, // ou 0 pour vraiment tout en bas
+        left: 0,
+        right: 0,
+        alignItems: 'center',
+        backgroundColor: 'gray',
+        height:40,
+        padding:10,
+        
+    },
+    
 });

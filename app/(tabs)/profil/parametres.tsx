@@ -1,7 +1,7 @@
 import { StyleSheet, Image } from 'react-native';
 import { Text, View } from '@/components/Themed';
+import { PersonneContext } from '../../context/PersonneContext';
 import { useContext } from 'react';
-import { PersonneContext } from '../context/PersonneContext';
 
 export default function TabOneScreen() {
   const context = useContext(PersonneContext);
@@ -10,11 +10,9 @@ export default function TabOneScreen() {
   const { personne } = context;
 
   return (
-    <View style={styles.container}>
-    {personne.image && (
-      <Image source={personne.image} style={styles.avatar} />
-    )}
+  <View style={styles.container}>
     <Text style={styles.title}>{personne.nom}</Text>
+    <Text>Hello</Text>
   </View>
   
   );
