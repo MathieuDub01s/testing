@@ -26,7 +26,7 @@ export default function TabLayout() {
         // to prevent a hydration error in React Navigation v6.
         headerShown: useClientOnlyValue(false, true),
       }}>
-       <Tabs.Screen
+      <Tabs.Screen
         name="profil" // Un seul nom pour les deux composants
         options={{
           title: 'Profil',
@@ -40,6 +40,7 @@ export default function TabLayout() {
           tabBarIcon: ({ color }) => <TabBarIcon name="camera" color={color} />,
         }}
       />
+      
       <Tabs.Screen
         name="micro"
         options={{
@@ -47,6 +48,7 @@ export default function TabLayout() {
           tabBarIcon: ({ color }) => <TabBarIcon name="microphone" color={color} />,
         }}
       />
+       
     </Tabs>
   );
 }
