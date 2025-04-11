@@ -22,7 +22,10 @@ export default function MonInputTexte() {
         setPersonne(prev => ({ ...prev, couleur: "#fff" }));
       };
       const changerImage = () => {
-        setPersonne(prev => ({ ...prev, image: '../assets/images/pfp-base.jpg' }));
+        setPersonne(prev => ({
+            ...prev,
+            image: require('../assets/images/pfp-base.jpg'), 
+          }));          
       };      
     const handleLogin = () => {
         if (nom.toLocaleLowerCase() == "math" && password == "123") {

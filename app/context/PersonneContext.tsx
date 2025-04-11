@@ -4,7 +4,7 @@ import React, { createContext, useState, ReactNode, Dispatch, SetStateAction } f
 export type Personne = {
   nom: string;
   motDePasse: string;
-  image: string;
+  image: any;
   son: string;
   couleur: string;
 };
