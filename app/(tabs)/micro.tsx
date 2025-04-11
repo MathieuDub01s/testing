@@ -3,8 +3,14 @@ import { View, Text, StyleSheet, Alert, TouchableOpacity } from 'react-native';
 import { Audio } from 'expo-av';
 import * as FileSystem from 'expo-file-system';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
+import { useContext } from 'react';
+import { PersonneContext } from '../context/PersonneContext'; 
 
 export default function Micro() {
+  const context = useContext(PersonneContext);
+  if (!context) throw new Error('Contexte Personne non trouvé');
+
+  const { personne, setPersonne } = context;
   const [recording, setRecording] = useState<Audio.Recording | null>(null);
   const [sound, setSound] = useState<Audio.Sound | null>(null);
   const [audioUri, setAudioUri] = useState<string | null>(null);
@@ -41,6 +47,9 @@ export default function Micro() {
       const uri = recording.getURI();
       setAudioUri(uri ?? null);
       setRecording(null);
+      if (uri) {
+        setPersonne({ ...personne, son: uri });
+      }
       Alert.alert("✅ Enregistrement terminé", uri ?? "Aucune URI trouvée");
     } catch (err) {
       console.error('Erreur à l’arrêt de l’enregistrement', err);
@@ -71,6 +80,7 @@ export default function Micro() {
       try {
         await FileSystem.deleteAsync(audioUri);
         setAudioUri(null);
+        setPersonne({ ...personne, son: '' });
         Alert.alert("🗑️ Fichier supprimé");
       } catch (err) {
         console.error("Erreur lors de la suppression", err);

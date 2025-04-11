@@ -1,12 +1,15 @@
-import { StyleSheet, Pressable, TextInput, View, Text } from 'react-native';
+import { StyleSheet, Pressable, TextInput, View, Text, Image } from 'react-native';
 import { useState } from 'react';
 import { Stack, router } from 'expo-router';
 import { useContext } from 'react';
 import { PersonneContext } from './context/PersonneContext';
+import { Dimensions } from 'react-native';
 
 export default function MonInputTexte() {
     const [nom, setNom] = useState('');
     const [password, setPassword] = useState('');
+    const screenWidth = Dimensions.get('window').width;
+    const logoSize = screenWidth * 0.65;
 
     const context = useContext(PersonneContext);
     if (!context) throw new Error('Contexte Personne non trouvé');
@@ -47,6 +50,10 @@ export default function MonInputTexte() {
                     title: 'Connexion',
                     headerBackVisible: false,
                 }}
+            />
+            <Image 
+                source={require('../assets/images/logo.webp')} 
+                style={{ width: logoSize, height: logoSize, marginBottom: 24 }} 
             />
             <TextInput
                 placeholder="Entrez votre nom"
