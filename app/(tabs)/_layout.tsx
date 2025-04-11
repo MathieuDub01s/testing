@@ -31,20 +31,6 @@ export default function TabLayout() {
         options={{
           title: 'Profil',
           tabBarIcon: ({ color }) => <TabBarIcon name="user" color={color} />,
-          // headerRight: () => (
-          //   <Link href="/modal" asChild>
-          //     <Pressable>
-          //       {({ pressed }) => (
-          //         <FontAwesome
-          //           name="info-circle"
-          //           size={25}
-          //           color={Colors[colorScheme ?? 'light'].text}
-          //           style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
-          //         />
-          //       )}
-          //     </Pressable>
-          //   </Link>
-          // ),
         }}
       />
       <Tabs.Screen
@@ -52,6 +38,13 @@ export default function TabLayout() {
         options={{
           title: 'Camera',
           tabBarIcon: ({ color }) => <TabBarIcon name="camera" color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="micro"
+        options={{
+          title: 'Micro',
+          tabBarIcon: ({ color }) => <TabBarIcon name="microphone" color={color} />,
         }}
       />
     </Tabs>
