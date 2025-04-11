@@ -1,4 +1,4 @@
-import { StyleSheet, Pressable, TextInput, View, Text, Image } from 'react-native';
+import { StyleSheet, Pressable, TextInput, View, Text, Image, KeyboardAvoidingView, ScrollView, Platform } from 'react-native';
 import { useState } from 'react';
 import { Stack, router } from 'expo-router';
 import { useContext } from 'react';
@@ -36,7 +36,7 @@ export default function MonInputTexte() {
             changerMP();
             changerCouleur();
             changerImage();
-            router.replace('/(tabs)/profil/profil');
+            router.replace('./(tabs)/profil/profil');
         }
         else {
             alert('Champs Invalide');
@@ -44,55 +44,66 @@ export default function MonInputTexte() {
     };
 
     return (
-        <View style={styles.container}>
-            <Stack.Screen
-                options={{
-                    title: 'Connexion',
-                    headerBackVisible: false,
-                }}
-            />
-            <Image 
-                source={require('../assets/images/logo.webp')} 
-                style={{ width: logoSize, height: logoSize, marginBottom: 24 }} 
-            />
-            <TextInput
-                placeholder="Entrez votre nom"
-                value={nom}
-                onChangeText={setNom}
-                style={styles.inputs}
-                placeholderTextColor="#888" 
-            />
-            <TextInput
-                placeholder="Mot de passe"
-                secureTextEntry={true}
-                value={password}
-                onChangeText={setPassword}
-                style={styles.inputs}
-                placeholderTextColor="#888" 
-            />
-            <Pressable
-                onPress={handleLogin}
-                style={({ pressed }) => ({
-                    backgroundColor: pressed ? '#aaa' : '#007AFF',
-                    padding: 12,
-                    borderRadius: 8,
-                })}
+        <KeyboardAvoidingView
+            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+            style={{ flex: 1 }}
+            keyboardVerticalOffset={Platform.OS === 'ios' ? 60 : 0}
+        >
+            <ScrollView
+                contentContainerStyle={{ flexGrow: 1 }}
+                keyboardShouldPersistTaps="handled"
             >
-                <Text style={{ color: 'white', textAlign: 'center', fontSize: 16 }}>
-                    Se connecter
-                </Text>
-            </Pressable>
-            <View style={styles.footer}>
-                <Text style={{fontSize:16}}>
-                    Mathieu Dubois, 
-                    Kéven B. Boisclair et
-                    Rosalie Boyer
-                </Text>
+                <View style={styles.container}>
+                    
+                    <Stack.Screen
+                        options={{
+                            title: 'Connexion',
+                            headerBackVisible: false,
+                        }}
+                    />
+                    <Image 
+                        source={require('../assets/images/logo.png')} 
+                        style={{ width: logoSize, height: logoSize, marginBottom: 24 }} 
+                    />
+                    <TextInput
+                        placeholder="Entrez votre nom"
+                        value={nom}
+                        onChangeText={setNom}
+                        style={styles.inputs}
+                        placeholderTextColor="#888" 
+                    />
+                    <TextInput
+                        placeholder="Mot de passe"
+                        secureTextEntry={true}
+                        value={password}
+                        onChangeText={setPassword}
+                        style={styles.inputs}
+                        placeholderTextColor="#888" 
+                    />
+                    <Pressable
+                        onPress={handleLogin}
+                        style={({ pressed }) => ({
+                            backgroundColor: pressed ? '#aaa' : '#007AFF',
+                            padding: 12,
+                            borderRadius: 8,
+                        })}
+                    >
+                        <Text style={{ color: 'white', textAlign: 'center', fontSize: 16 }}>
+                            Se connecter
+                        </Text>
+                    </Pressable>
+                    <View style={styles.footer}>
+                        <Text style={{fontSize:16}}>
+                            Mathieu Dubois, 
+                            Kéven B. Boisclair et
+                            Rosalie Boyer
+                        </Text>
+                        
+                    </View>
                 
-            </View>
-
-        
-        </View>
+                </View>
+            </ScrollView>
+        </KeyboardAvoidingView>
     );
 }
 const styles = StyleSheet.create({
