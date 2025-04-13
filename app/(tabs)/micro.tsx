@@ -105,7 +105,7 @@ export default function Micro() {
         onPress={playSound}
         disabled={!audioUri}
       >
-        <Ionicons name="play" size={40} color={audioUri ? 'green' : 'gray'} />
+        <Ionicons name="volume-high-outline" size={40} color={audioUri ? 'green' : 'gray'} />
       </TouchableOpacity>
 
       <TouchableOpacity
