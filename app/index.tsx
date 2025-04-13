@@ -36,7 +36,7 @@ export default function MonInputTexte() {
             changerMP();
             changerCouleur();
             changerImage();
-            router.replace('./(tabs)/profil/profil');
+            router.replace('/profil');
         }
         else {
             alert('Champs Invalide');
@@ -62,7 +62,7 @@ export default function MonInputTexte() {
                         }}
                     />
                     <Image 
-                        source={require('../assets/images/logo.png')} 
+                        source={require('../assets/images/logo.webp')} 
                         style={{ width: logoSize, height: logoSize, marginBottom: 24 }} 
                     />
                     <TextInput
