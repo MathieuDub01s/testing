@@ -43,23 +43,24 @@ export default function TabOneScreen() {
   }, [sound]);
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: personne.couleur }]}>
+    
     {personne.image && (
       <Image source={personne.image} style={styles.avatar} />
     )}
     <Text style={styles.title}>{personne.nom}</Text>
 
     <View style={styles.iconRow}>
-    <TouchableOpacity onPress={playSound} disabled={!personne?.son}>
+      <TouchableOpacity onPress={playSound} disabled={!personne?.son}>
           <Ionicons
             name="volume-high-outline"
             size={50}
             color={personne?.son ? 'white' : 'gray'}
           />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => router.push('/(tabs)/profil/parametres')}>
-          <Ionicons name="settings-outline" size={50} color={'white'} />
-        </TouchableOpacity>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => router.push('/(tabs)/profil/parametres')}>
+        <Ionicons name="settings-outline" size={50} color={'blue'} />
+      </TouchableOpacity>
     </View>
   </View>
   
@@ -90,7 +91,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',  
     alignItems: 'center',     
     gap: 120,       
-    marginTop:100            
+    marginTop:100,
+    backgroundColor: 'transparent'
+
+
   }
   
 });

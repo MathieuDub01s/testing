@@ -4,6 +4,8 @@ import { useRef, useState } from 'react';
 import { Button, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Slider from '@react-native-community/slider';
 import { Ionicons, MaterialCommunityIcons, Entypo } from '@expo/vector-icons';
+import { PersonneContext } from '../context/PersonneContext'; 
+import { useContext } from 'react';
 
 export default function App() {
   const [facing, setFacing] = useState<CameraType>('back');
@@ -13,6 +15,11 @@ export default function App() {
   const [mediaPermission, requestMediaPermission] = MediaLibrary.usePermissions();
   const cameraRef = useRef<CameraView>(null);
 
+  const context = useContext(PersonneContext);
+  if (!context) throw new Error('Contexte Personne non trouvé');
+  const { personne, setPersonne } = context;
+  
+    
   if (!permission || !mediaPermission) return <View />;
   if (!permission.granted) {
     return (
@@ -65,12 +72,12 @@ export default function App() {
         <View style={styles.controls}>
           {/* Switch Camera */}
           <TouchableOpacity style={styles.button} onPress={toggleCameraFacing}>
-            <Ionicons name="camera-reverse-outline" size={40} color="white" />
+            <Ionicons name="camera-reverse-outline" size={40} color={personne.couleur}/>
           </TouchableOpacity>
 
           {/* Take Photo */}
           <TouchableOpacity style={styles.captureButton} onPress={takePhoto}>
-            <Entypo name="circle" size={70} color="white" />
+            <Entypo name="circle" size={70} color={personne.couleur} />
           </TouchableOpacity>
 
           {/* Flash Toggle */}
@@ -78,7 +85,7 @@ export default function App() {
             <MaterialCommunityIcons
               name={flash === 'on' ? 'flash' : 'flash-off'}
               size={40}
-              color="white"
+              color={personne.couleur}
             />
           </TouchableOpacity>
         </View>

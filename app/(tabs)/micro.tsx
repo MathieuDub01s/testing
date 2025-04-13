@@ -89,7 +89,8 @@ export default function Micro() {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: personne.couleur }]}>
+    
       {/* Nouveau bouton micro circulaire */}
       <TouchableOpacity
         onPress={toggleRecording}
