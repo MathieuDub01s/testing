@@ -13,8 +13,6 @@ export default function TabOneScreen() {
   const { personne } = context;
   const [sound, setSound] = useState<Audio.Sound | null>(null);
   const router = useRouter();
-
-  console.log("Son de la personne :", personne.son);
   
   const playSound = async () => {
     if (!personne?.son) return;
@@ -55,7 +53,7 @@ export default function TabOneScreen() {
           <Ionicons
             name="volume-high-outline"
             size={50}
-            color={personne?.son ? 'white' : 'gray'}
+            color={personne?.son ? 'blue' : 'grey'}
           />
       </TouchableOpacity>
       <TouchableOpacity onPress={() => router.push('/(tabs)/profil/parametres')}>
